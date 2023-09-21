@@ -6,6 +6,7 @@ import model.Service;
 public class Presenter {
     Console console = new Console();
     Service service = new Service();
+    
     public void start() {
         boolean continueLoop = true;
         int choice;

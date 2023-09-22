@@ -4,9 +4,9 @@ public class Toy {
     private long id;
     private String name;
     private long amount;
-    private int drop_chance;
+    private long drop_chance;
 
-    public Toy (long id, String name, long amount, int drop_chance) {
+    public Toy (long id, String name, long amount, long drop_chance) {
         this.id = id;
         this.name = name;
         this.amount = amount;
@@ -47,11 +47,11 @@ public class Toy {
         this.amount = amount;
     }
 
-    public int getDrop_chance() {
+    public long getDrop_chance() {
         return drop_chance;
     }
 
-    public void setDrop_chance(int drop_chance) {
+    public void setDrop_chance(long drop_chance) {
         this.drop_chance = drop_chance;
     }
 }

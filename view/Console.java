@@ -14,7 +14,7 @@ public class Console {
                 1. Print all toys
                 2. Create a new toy
                 3. Change a toy
-                4. Start a game
+                4. Start the game
                 5. Exit
                 """);
         choice = scanner.nextInt();

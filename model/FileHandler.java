@@ -39,4 +39,25 @@ public class FileHandler {
 
         return toys;
     }
+
+    public int generateUniqueID() {
+        int lastID = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length > 0) {
+                    int id = Integer.parseInt(parts[0].trim());
+                    lastID = Math.max(lastID, id);
+                }
+            }
+
+            return lastID + 1;
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the CSV file: " + e.getMessage());
+            return 1;
+        }
+    }
 }

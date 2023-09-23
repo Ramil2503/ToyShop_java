@@ -39,4 +39,69 @@ public class FileHandler {
 
         return toys;
     }
+
+    public void decreaseToyById(long id) {
+        List<Toy> toys = readFromCSV();
+        boolean found = false;
+
+        for (Toy toy : toys) {
+            if (toy.getId() == id) {
+                toy.setAmount(toy.getAmount() - 1);
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            updateCSVFile(toys);
+        } else {
+            System.out.println("Toy with ID " + id + " not found.");
+        }
+    }
+
+    private void updateCSVFile(List<Toy> toys) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
+            for (Toy toy : toys) {
+                String line = toy.getId() + "," + toy.getName() + "," + toy.getAmount() + "," + toy.getDrop_chance();
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteToyById(long id) {
+        List<Toy> toys = readFromCSV();
+
+        List<Toy> updatedToys = new ArrayList<>();
+
+        for (Toy toy : toys) {
+            if (toy.getId() != id) {
+                updatedToys.add(toy);
+            }
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
+            for (Toy toy : updatedToys) {
+                String line = toy.getId() + "," + toy.getName() + "," + toy.getAmount() + "," + toy.getDrop_chance();
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Toy getToyById(long id) {
+        List<Toy> toys = readFromCSV();
+
+        for (Toy toy : toys) {
+            if (toy.getId() == id) {
+                return toy;
+            }
+        }
+
+        return null;
+    }
 }

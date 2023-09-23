@@ -44,7 +44,7 @@ public class Service {
         List<Integer> weightedToyIds = new ArrayList<>();
 
         for (Toy toy : toys) {
-            int dropChance = (int) toy.getDrop_chance();
+            int dropChance = (int) toy.getAmount();
             for (int i = 0; i < dropChance; i++) {
                 weightedToyIds.add((int) toy.getId());
             }
@@ -56,5 +56,13 @@ public class Service {
         }
 
         return -1;
+    }
+
+    public Toy getToyById(long id) {
+        return fileHandler.getToyById(id);
+    }
+
+    public void decreaseToy(long id) {
+        fileHandler.decreaseToyById(id);
     }
 }

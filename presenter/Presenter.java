@@ -23,7 +23,9 @@ public class Presenter {
 
                     break;
                 case 4:
-
+                    long winToyID = service.getRandomToyId();
+                    service.decreaseToy(winToyID);
+                    console.printToy(service.getToyById(winToyID));
                     break;
                 case 5:
                     continueLoop = false;

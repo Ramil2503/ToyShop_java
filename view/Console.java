@@ -27,6 +27,10 @@ public class Console {
         }
     }
 
+    public void printToy(Toy toy) {
+        System.out.println(toy);
+    }
+
     public Toy createToy() {
         System.out.println("Enter the name of a toy: ");
         scanner.nextLine();

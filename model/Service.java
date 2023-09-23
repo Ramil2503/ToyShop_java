@@ -11,6 +11,7 @@ public class Service {
     public void createToy(Toy toy) {
         toy.setId(generateUniqueID());
         fileHandler.saveToCSV(toy);
+        fileHandler.updateCSVFile(countChances(fileHandler.readFromCSV()));
     }
 
     public List<Toy> allToys() {
@@ -39,6 +40,19 @@ public class Service {
         return toys;
     }
 
+    public void deleteToyById(long id) {
+        List<Toy> toys = fileHandler.readFromCSV();
+        List<Toy> updatedToys = new ArrayList<>();
+
+        for (Toy toy : toys) {
+            if (toy.getId() != id) {
+                updatedToys.add(toy);
+            }
+        }
+
+        fileHandler.updateCSVFile(updatedToys);
+    }
+
     public int getRandomToyId() {
         List<Toy> toys = fileHandler.readFromCSV();
         List<Integer> weightedToyIds = new ArrayList<>();
@@ -59,10 +73,41 @@ public class Service {
     }
 
     public Toy getToyById(long id) {
-        return fileHandler.getToyById(id);
+        return getToyFromFile(id);
+    }
+
+    public Toy getToyFromFile(long id) {
+        List<Toy> toys = fileHandler.readFromCSV();
+
+        for (Toy toy : toys) {
+            if (toy.getId() == id) {
+                return toy;
+            }
+        }
+
+        return null;
     }
 
     public void decreaseToy(long id) {
-        fileHandler.decreaseToyById(id);
+        decreaseToyById(id);
+    }
+
+    public void decreaseToyById(long id) {
+        List<Toy> toys = fileHandler.readFromCSV();
+        boolean found = false;
+
+        for (Toy toy : toys) {
+            if (toy.getId() == id) {
+                toy.setAmount(toy.getAmount() - 1);
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            fileHandler.updateCSVFile(toys);
+        } else {
+            System.out.println("Toy with ID " + id + " not found.");
+        }
     }
 }

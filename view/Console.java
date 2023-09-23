@@ -41,4 +41,16 @@ public class Console {
         Toy toy = new Toy(name, amount);
         return toy;
     }
+
+    public long enterToyID() {
+        System.out.println("Enter Toy ID: ");
+        long id = scanner.nextLong();
+        return id;
+    }
+
+    public long enterToyAmount() {
+        System.out.println("Enter Toy amount: ");
+        long amount = scanner.nextLong();
+        return amount;
+    }
 }

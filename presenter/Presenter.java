@@ -20,7 +20,9 @@ public class Presenter {
                     service.createToy(console.createToy());
                     break;
                 case 3:
-
+                    long id = console.enterToyID();
+                    long amount = console.enterToyAmount();
+                    service.changeToyAmount(id, amount);
                     break;
                 case 4:
                     long winToyID = service.getRandomToyId();

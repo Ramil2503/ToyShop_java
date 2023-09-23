@@ -11,6 +11,20 @@ public class Service {
     public void createToy(Toy toy) {
         toy.setId(generateUniqueID());
         fileHandler.saveToCSV(toy);
+        updateDropChances();
+    }
+
+    public void changeToyAmount(long id, long amount) {
+        List<Toy> toys = fileHandler.readFromCSV();
+        for (Toy toy : toys) {
+            if (id == toy.getId()) {
+                toy.setAmount(amount);
+            }
+        }
+        fileHandler.updateCSVFile(toys);
+    }
+
+    public void updateDropChances() {
         fileHandler.updateCSVFile(countChances(fileHandler.readFromCSV()));
     }
 
